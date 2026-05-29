@@ -40,11 +40,12 @@
             class="h-full w-full px-4 text-base outline-none placeholder:text-[#777]"
             placeholder="Search wine, whisky, soju..."
             @focus="toggleOverlay('search')"
+            @keydown.enter.prevent="submitSearch"
           />
           <button v-if="searchQuery" class="grid h-12 w-12 place-items-center text-[#777]" aria-label="Clear search" @click="searchQuery = ''">
             <IconX class="size-5" />
           </button>
-          <button class="grid h-12 w-20 place-items-center bg-[#a9271e] text-sm font-bold text-white transition hover:bg-[#8f211a]" @click="toggleOverlay('search')">
+          <button class="grid h-12 w-20 place-items-center bg-[#a9271e] text-sm font-bold text-white transition hover:bg-[#8f211a]" @click="submitSearch">
             Search
           </button>
           <Transition name="dropdown-pop">
@@ -117,8 +118,8 @@
       <div class="px-5 pb-4 md:hidden">
         <div class="relative flex h-11 bg-white transition duration-200" :class="focusClass('search')">
           <IconSearch class="ml-3 mt-3 size-5 text-[#777]" />
-          <input v-model="searchQuery" class="h-full w-full px-3 text-sm outline-none placeholder:text-[#777]" placeholder="Search..." @focus="toggleOverlay('search')" />
-          <button class="grid h-11 w-16 place-items-center bg-[#a9271e] text-xs font-bold text-white" @click="toggleOverlay('search')">Search</button>
+          <input v-model="searchQuery" class="h-full w-full px-3 text-sm outline-none placeholder:text-[#777]" placeholder="Search..." @focus="toggleOverlay('search')" @keydown.enter.prevent="submitSearch" />
+          <button class="grid h-11 w-16 place-items-center bg-[#a9271e] text-xs font-bold text-white" @click="submitSearch">Search</button>
         </div>
         <Transition name="dropdown-pop">
           <div v-if="searchOpen" class="relative z-50 mt-2 border border-[#dddddd] bg-white p-3 text-[#333] shadow-xl">
@@ -283,6 +284,20 @@ const categoryPath = (name: string) => `/categories/${name.toLowerCase().replace
 const goToCategory = async (name: string) => {
   closeAll()
   await navigateTo(categoryPath(name))
+}
+
+const submitSearch = async () => {
+  const keyword = searchQuery.value.trim()
+  if (!keyword) {
+    languageOpen.value = false
+    searchOpen.value = true
+    cartOpen.value = false
+    categoryOpen.value = false
+    return
+  }
+
+  closeAll()
+  await navigateTo({ path: '/search', query: { q: keyword } })
 }
 
 const handlePointerDown = (event: PointerEvent) => {

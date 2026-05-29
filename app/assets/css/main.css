@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fff;
+  color: #383838;
+}
+
+::selection {
+  background: #a0442c;
+  color: #fffaf2;
+}
+
+.reveal {
+  animation: reveal 0.7s ease both;
+}
+
+.float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+.bottle-shine::after {
+  background: linear-gradient(120deg, transparent 15%, rgba(255, 255, 255, 0.5), transparent 75%);
+  content: '';
+  inset: 0;
+  position: absolute;
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.group:hover .bottle-shine::after {
+  transform: translateX(120%);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+.hero-wood {
+  background:
+    radial-gradient(circle at 82% 46%, rgba(220, 185, 112, 0.42) 0 12%, transparent 13%),
+    radial-gradient(circle at 24% 55%, rgba(255, 186, 102, 0.34) 0 15%, transparent 16%),
+    linear-gradient(90deg, rgba(77, 38, 18, 0.86), rgba(11, 9, 8, 0.97) 55%, #080706);
+}
+
+.hero-wood::before {
+  background:
+    linear-gradient(14deg, transparent 0 42%, rgba(193, 105, 45, 0.55) 43% 52%, transparent 53%),
+    repeating-linear-gradient(4deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 18px);
+  content: '';
+  inset: 0;
+  opacity: 0.72;
+  position: absolute;
+}
+
+.product-bottle {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.72), transparent 24% 70%, rgba(0, 0, 0, 0.18)),
+    var(--bottle, #b4692d);
+}
+
+.product-bottle::before {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 4px;
+  content: '';
+  height: 34%;
+  left: 14%;
+  position: absolute;
+  right: 14%;
+  top: 43%;
+}
+
+.product-bottle::after {
+  background: rgba(20, 20, 20, 0.84);
+  border-radius: 999px 999px 4px 4px;
+  content: '';
+  height: 18%;
+  left: 25%;
+  position: absolute;
+  right: 25%;
+  top: -16%;
+}
+
+.zoom-glow {
+  background: radial-gradient(circle at var(--zoom-x, 50%) var(--zoom-y, 50%), rgba(197, 40, 32, 0.08), transparent 22%);
+}
+
+.wide-promo-bg {
+  background:
+    linear-gradient(90deg, #c52820 0 40%, transparent 40%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 31%, transparent 31%),
+    radial-gradient(circle at 80% 65%, rgba(255, 255, 255, 0.35), transparent 28%),
+    linear-gradient(135deg, #e8f2f0, #8cc0c7 60%, #d93b35);
+}
+
+.local-promo-bg {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.1)),
+    radial-gradient(circle at 50% 78%, rgba(255, 255, 255, 0.45), transparent 18%),
+    linear-gradient(180deg, #304937, #d9b233 58%, #7d4d2f);
+}
+
+.soju-promo-bg {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.1)),
+    radial-gradient(circle at 70% 62%, rgba(255, 255, 255, 0.5), transparent 16%),
+    linear-gradient(135deg, #233b2e, #8fc097 55%, #eac7bd);
+}
+
+.menu-fade-enter-active,
+.menu-fade-leave-active,
+.category-slide-enter-active,
+.category-slide-leave-active,
+.dropdown-pop-enter-active,
+.dropdown-pop-leave-active,
+.backdrop-fade-enter-active,
+.backdrop-fade-leave-active,
+.tab-panel-enter-active,
+.tab-panel-leave-active {
+  transition: opacity 0.22s ease, transform 0.22s ease, max-height 0.28s ease;
+}
+
+.menu-fade-enter-from,
+.menu-fade-leave-to {
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.category-slide-enter-from,
+.category-slide-leave-to {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.category-slide-enter-to,
+.category-slide-leave-from {
+  max-height: 260px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-pop-enter-from,
+.dropdown-pop-leave-to {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+}
+
+.backdrop-fade-enter-from,
+.backdrop-fade-leave-to {
+  opacity: 0;
+}
+
+.tab-panel-enter-from,
+.tab-panel-leave-to {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.product-card-enter-active,
+.product-card-leave-active,
+.product-card-move {
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.product-card-enter-from,
+.product-card-leave-to {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.cart-shell {
+  display: grid;
+  gap: 2rem;
+}
+
+.cart-list-card {
+  background: #fff;
+  border: 1px solid #eeeeee;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px rgba(20, 20, 20, 0.04);
+  min-width: 0;
+}
+
+.cart-list-head {
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  color: #777;
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 1rem 1.5rem;
+  text-transform: uppercase;
+}
+
+.cart-line-item {
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.cart-line-item:last-child {
+  border-bottom: 0;
+}
+
+.cart-summary-col {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .cart-list-head {
+    display: flex;
+  }
+
+  .cart-line-item {
+    align-items: center;
+    flex-direction: row;
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cart-shell {
+    align-items: start;
+    grid-template-columns: minmax(0, 1fr) 380px;
+  }
+
+  .cart-summary-col {
+    position: sticky;
+    top: 1.5rem;
+  }
+}

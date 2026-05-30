@@ -50,7 +50,7 @@
 
                 <p class="w-36 shrink-0 text-left text-lg font-black md:text-right">{{ formatRupiah(item.price * item.qty) }}</p>
 
-                <button class="grid size-10 shrink-0 place-items-center rounded-full text-[#777] transition hover:bg-[#fff3f2] hover:text-brand-red" aria-label="Remove item" @click="removeItem(item.name)">
+                <button class="grid size-10 shrink-0 place-items-center rounded-full text-[#777] transition hover:bg-[#f5f3ff] hover:text-brand-red" aria-label="Remove item" @click="removeItem(item.name)">
                   <IconTrash class="size-5" />
                 </button>
               </div>
@@ -98,7 +98,7 @@
                 <p class="mt-2 text-xs leading-5 text-[#777]">Taxes and final delivery fees are calculated at checkout.</p>
               </div>
 
-              <button class="mt-6 h-12 w-full bg-brand-red text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#a9271e]">
+              <button class="mt-6 h-12 w-full bg-brand-red text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#5b21b6]">
                 Checkout
               </button>
             </div>
@@ -162,7 +162,7 @@ const recommendedProducts = [
 ]
 
 useSeoMeta({
-  title: 'Cart - Cellarjak',
+  title: 'Cart - tokowinepop',
   description: 'Review your shopping cart and checkout.'
 })
 </script>

@@ -6,7 +6,7 @@
         <div class="absolute inset-0 bg-black/12" />
         <div class="absolute inset-x-0 bottom-12 text-center">
           <h3 class="mb-7 text-4xl font-black text-white drop-shadow">{{ title }}</h3>
-          <span class="inline-flex bg-brand-red px-8 py-4 text-base font-black uppercase tracking-wider text-white transition hover:bg-[#a9271e]">Shop Now</span>
+          <span class="inline-flex bg-brand-red px-8 py-4 text-base font-black uppercase tracking-wider text-white transition hover:bg-[#5b21b6]">Shop Now</span>
         </div>
       </NuxtLink>
 

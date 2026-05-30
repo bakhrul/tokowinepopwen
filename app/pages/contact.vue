@@ -60,7 +60,7 @@ const cards = [
 ]
 
 useSeoMeta({
-  title: 'Contact Us - Cellarjak',
+  title: 'Contact Us - tokowinepop',
   description: 'Contact Tokowinepop support by WhatsApp or email.'
 })
 </script>

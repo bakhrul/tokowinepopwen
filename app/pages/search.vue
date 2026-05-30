@@ -21,7 +21,7 @@
           <form class="flex h-12 overflow-hidden border border-[#dddddd] bg-white shadow-sm" @submit.prevent="updateKeyword">
             <IconSearch class="ml-4 mt-3.5 size-5 text-[#777]" />
             <input v-model="draftKeyword" class="h-full min-w-0 flex-1 px-4 text-sm outline-none" placeholder="Search wine, whisky, soju..." />
-            <button class="bg-brand-red px-5 text-sm font-black text-white transition hover:bg-[#a9271e]">Search</button>
+            <button class="bg-brand-red px-5 text-sm font-black text-white transition hover:bg-[#5b21b6]">Search</button>
           </form>
         </div>
       </div>
@@ -65,7 +65,7 @@
             <div v-else class="rounded-lg border border-[#eeeeee] bg-[#fafafa] p-10 text-center">
               <p class="text-lg font-black text-[#333]">No products found</p>
               <p class="mt-2 text-sm leading-6 text-[#666]">Try another keyword or clear some filters.</p>
-              <button class="mt-5 bg-brand-red px-5 py-3 text-sm font-black text-white transition hover:bg-[#a9271e]" @click="resetSearch">
+              <button class="mt-5 bg-brand-red px-5 py-3 text-sm font-black text-white transition hover:bg-[#5b21b6]" @click="resetSearch">
                 Reset search
               </button>
             </div>
@@ -155,7 +155,7 @@ const resetSearch = async () => {
 }
 
 useSeoMeta({
-  title: () => (queryText.value ? `Search ${queryText.value} - Cellarjak` : 'Search - Cellarjak'),
+  title: () => (queryText.value ? `Search ${queryText.value} - tokowinepop` : 'Search - tokowinepop'),
   description: 'Browse search results with filters, sorting, and product cards.'
 })
 </script>

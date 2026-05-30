@@ -5,15 +5,12 @@
     <OfferTiles :offers="offers" />
     <ProductCollection
       id="collections"
-      title="Tabbed Collections"
-      :tabs="['New Collection', 'Bestseller', 'Featured Product']"
+      title="Best Seller"
       :products="featuredProducts"
       cta-title="New Arrivals"
       cta-text="Shop all"
     />
     <StorySection />
-    <PromoProductGrid title="Local Pride" promo-class="local-promo-bg" href="/categories/local-pride" :products="localProducts" />
-    <PromoProductGrid title="Soju" promo-class="soju-promo-bg" href="/categories/soju" :products="sojuProducts" reverse />
     <BrandStrip :brands="brands" />
   </main>
 </template>
@@ -83,24 +80,19 @@ const categories = [
 const offers = [
   {
     title: 'Spirits',
-    bottles: [
-      { color: '#d98b32', size: 'h-52 w-16' },
-      { color: '#b56c2c', size: 'h-48 w-16' }
-    ]
+    image: 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?auto=format&fit=crop&w=700&q=85'
   },
   {
     title: 'Wine',
-    bottles: [
-      { color: '#25221d', size: 'h-56 w-16' },
-      { color: '#6d1826', size: 'h-60 w-16' }
-    ]
+    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=85'
   },
   {
     title: 'Beer',
-    bottles: [
-      { color: '#e2a72d', size: 'h-52 w-14' },
-      { color: '#202020', size: 'h-48 w-16' }
-    ]
+    image: 'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=700&q=85'
+  },
+  {
+    title: 'Bundles',
+    image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=700&q=85'
   }
 ]
 
@@ -115,24 +107,6 @@ const featuredProducts = [
   { brand: 'Monkey Shoulder', name: 'Monkey Shoulder Blended Whisky 700ml', price: 'Rp 700.000,00', color: '#d19035', size: 'h-72 w-24' },
   { brand: 'Glenfiddich', name: 'Glenfiddich 12yrs Single Malt Whisky 700ml', price: 'Rp 820.000,00', color: '#285338', size: 'h-80 w-24' },
   { brand: 'Buffalo Trace', name: 'Buffalo Trace Bourbon Whiskey 750ml', price: 'Rp 715.000,00', color: '#9c351d', size: 'h-72 w-24' }
-]
-
-const localProducts = [
-  { brand: 'Iceland', name: 'Iceland Vodka Original 700ml', price: 'Rp 160.000,00', color: '#e8eef8', size: 'h-72 w-20' },
-  { brand: 'Kawa Kawa', name: 'Kawa Kawa Blackcurrant 600ml', price: 'Rp 76.000,00', color: '#4b203f', size: 'h-64 w-20' },
-  { brand: 'Cheosnun Soju', name: 'Cheosnun Soju Lychee 360ml', price: 'Rp 60.000,00', color: '#2f8b45', size: 'h-72 w-20' },
-  { brand: 'Bintang', name: 'Bintang Beer Can 500ml', price: 'Rp 34.000,00', color: '#d9d9d9', size: 'h-52 w-24' },
-  { brand: 'Vibe', name: 'Vibe Exotic Lychee 700ml', price: 'Rp 290.000,00', color: '#c33376', size: 'h-80 w-24' },
-  { brand: 'Kawa Kawa', name: 'Kawa Kawa Anggur Hijau 600ml', price: 'Rp 76.000,00', color: '#4f7c3e', size: 'h-72 w-20' }
-]
-
-const sojuProducts = [
-  { brand: 'Cheosnun Soju', name: 'Cheosnun Soju Lychee 360ml', price: 'Rp 60.000,00', color: '#2f8b45', size: 'h-72 w-20' },
-  { brand: 'Happy Soju', name: 'Happy Soju Strawberry 360ml', price: 'Rp 70.000,00', color: '#3a964e', size: 'h-72 w-20' },
-  { brand: 'Cheosnun Soju', name: 'Cheosnun Soju Peach 360ml', price: 'Rp 60.000,00', color: '#319150', size: 'h-72 w-20' },
-  { brand: 'Happy Soju', name: 'Andong Strength Soju Original 700ml', price: 'Rp 225.000,00', color: '#e8e8e8', size: 'h-72 w-24' },
-  { brand: 'Cheosnun Soju', name: 'Cheosnun Soju Mango 360ml', price: 'Rp 60.000,00', color: '#3e7b39', size: 'h-64 w-20' },
-  { brand: 'Happy Soju', name: 'Happy Soju Lemon 360ml', price: 'Rp 70.000,00', color: '#61a43e', size: 'h-72 w-20' }
 ]
 
 const brands = ['Macallan', 'Hibiki', 'Don Julio', 'Jose Cuervo', 'Singleton', 'Cardhu']

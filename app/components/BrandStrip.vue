@@ -1,25 +1,25 @@
 <template>
   <section class="bg-white px-5 py-12 sm:px-8 lg:px-12">
-    <h2 class="mb-9 text-center text-3xl font-black text-[#333] sm:text-4xl">Best Collection</h2>
+    <h2 class="mb-9 text-center text-3xl font-bold text-[#333] sm:text-4xl">Best Collection</h2>
     <div class="mx-auto grid max-w-[1920px] grid-cols-1 gap-px overflow-hidden border border-[#d8d8d8] bg-[#d8d8d8] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-      <NuxtLink v-for="brand in brandItems" :key="brand.name" :to="brand.to" class="group grid min-h-60 place-items-center bg-white p-6 text-center transition duration-300 hover:z-10 hover:-translate-y-1 hover:shadow-xl">
-        <div class="w-full">
-          <div :class="['mx-auto flex h-24 w-full max-w-[220px] items-center justify-center rounded-lg border border-[#eeeeee] bg-white px-4 shadow-sm transition group-hover:border-brand-red/30', brand.logoTone]">
+      <NuxtLink v-for="brand in brandItems" :key="brand.name" :to="brand.to" class="group grid min-h-60 min-w-0 place-items-center overflow-hidden bg-white p-6 text-center transition duration-300 hover:z-10 hover:-translate-y-1 hover:shadow-xl">
+        <div class="min-w-0 w-full">
+          <div :class="['mx-auto flex h-24 w-full max-w-[220px] items-center justify-center overflow-hidden bg-white px-4 transition', brand.logoTone]">
             <div v-if="brand.logoStyle === 'seal'" class="grid size-16 place-items-center rounded-full border-4 border-current text-2xl font-black">
               {{ brand.initials }}
             </div>
-            <div v-else-if="brand.logoStyle === 'script'" class="font-display text-3xl font-bold italic leading-none">
+            <div v-else-if="brand.logoStyle === 'script'" class="max-w-full truncate font-display text-3xl font-bold italic leading-none">
               {{ brand.shortName }}
             </div>
-            <div v-else-if="brand.logoStyle === 'stack'" class="text-center">
-              <span class="block text-2xl font-black uppercase leading-none tracking-[0.16em]">{{ brand.shortName }}</span>
+            <div v-else-if="brand.logoStyle === 'stack'" class="max-w-full overflow-hidden text-center">
+              <span class="block max-w-full truncate text-xl font-black uppercase leading-none tracking-[0.1em]">{{ brand.shortName }}</span>
               <span class="mt-2 block text-[10px] font-bold uppercase tracking-[0.24em] opacity-60">Reserve</span>
             </div>
-            <div v-else class="text-3xl font-black uppercase tracking-tight">
+            <div v-else class="max-w-full truncate text-2xl font-black uppercase tracking-tight">
               {{ brand.shortName }}
             </div>
           </div>
-          <p class="mt-5 text-base font-black text-[#333]">{{ brand.name }}</p>
+          <p class="mt-5 text-base font-semibold text-[#333]">{{ brand.name }}</p>
         </div>
       </NuxtLink>
     </div>

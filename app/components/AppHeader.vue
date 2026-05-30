@@ -1,52 +1,27 @@
 <template>
-  <header ref="headerRef" class="relative z-40 bg-white text-[#333]">
+  <header ref="headerRef" class="relative z-40 max-w-full overflow-x-clip bg-white text-[#333]">
     <Transition name="backdrop-fade">
       <button v-if="isOverlayOpen" class="fixed inset-0 z-[45] cursor-default bg-black/25 backdrop-blur-[2px]" aria-label="Close menu overlay" @click="closeAll" />
     </Transition>
-    <div class="h-9 border-t border-[#1f1f1f] bg-[#eeeeee]">
-      <div class="relative mx-auto flex h-full max-w-[1920px] items-center px-5 text-sm sm:px-8 lg:px-12">
-        <button class="relative flex items-center gap-2 font-medium transition duration-200" :class="focusClass('language')" @click="toggleOverlay('language')">
-          <IconGlobe class="size-4" />
-          {{ selectedLanguage }}
-          <IconChevronDown class="size-4 transition" :class="languageOpen ? 'rotate-180' : ''" />
-        </button>
-        <Transition name="dropdown-pop">
-          <div v-if="languageOpen" class="absolute left-5 top-9 z-50 w-44 border border-[#dddddd] bg-white p-2 shadow-xl sm:left-8 lg:left-12">
-            <button
-              v-for="language in languages"
-              :key="language"
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-left transition hover:bg-[#f7f7f7]"
-              :class="selectedLanguage === language ? 'font-bold text-brand-red' : ''"
-              @click="selectLanguage(language)"
-            >
-              {{ language }}
-              <IconCheck v-if="selectedLanguage === language" class="size-4" />
-            </button>
-          </div>
-        </Transition>
-      </div>
-    </div>
-
     <div class="bg-brand-red">
-      <div class="mx-auto flex max-w-[1920px] items-center gap-4 px-5 py-4 sm:px-8 lg:px-12">
-        <NuxtLink to="/" class="shrink-0 text-2xl font-light uppercase tracking-[0.16em] text-white transition duration-200 sm:text-4xl" :class="passiveHeaderClass" aria-label="Cellarjak home">
-          Cellarjak
+      <div class="mx-auto flex max-w-[1920px] items-center gap-3 px-4 py-4 sm:gap-4 sm:px-8 lg:px-12">
+        <NuxtLink to="/" class="min-w-0 shrink truncate text-[1.35rem] font-light tracking-[0.04em] text-white transition duration-200 sm:shrink-0 sm:text-4xl sm:tracking-[0.08em]" :class="passiveHeaderClass" aria-label="tokowinepop home">
+          tokowinepop
         </NuxtLink>
 
         <div class="relative hidden h-12 flex-1 items-center bg-white transition duration-200 md:flex" :class="focusClass('search')">
-          <IconSearch class="ml-4 size-5 text-[#777]" />
           <input
             v-model="searchQuery"
-            class="h-full w-full px-4 text-base outline-none placeholder:text-[#777]"
-            placeholder="Search wine, whisky, soju..."
+            class="h-full w-full px-5 text-base outline-none placeholder:text-[#777]"
+            placeholder="Search"
             @focus="toggleOverlay('search')"
             @keydown.enter.prevent="submitSearch"
           />
           <button v-if="searchQuery" class="grid h-12 w-12 place-items-center text-[#777]" aria-label="Clear search" @click="searchQuery = ''">
             <IconX class="size-5" />
           </button>
-          <button class="grid h-12 w-20 place-items-center bg-[#a9271e] text-sm font-bold text-white transition hover:bg-[#8f211a]" @click="submitSearch">
-            Search
+          <button class="grid h-12 w-20 place-items-center bg-brand-red text-white transition hover:bg-[#5b21b6]" aria-label="Search" @click="submitSearch">
+            <IconSearch class="size-6" />
           </button>
           <Transition name="dropdown-pop">
             <div v-if="searchOpen" class="absolute left-0 right-0 top-[calc(100%+8px)] z-50 border border-[#dddddd] bg-white p-4 text-[#333] shadow-2xl">
@@ -112,14 +87,33 @@
               </div>
             </Transition>
           </div>
+          <div class="relative transition duration-200 sm:hidden" :class="focusClass('menu')">
+            <button class="grid size-10 place-items-center" aria-label="Open navigation menu" @click="toggleOverlay('menu')">
+              <span class="flex w-6 flex-col gap-1.5">
+                <span class="h-0.5 w-full bg-white" />
+                <span class="h-0.5 w-full bg-white" />
+                <span class="h-0.5 w-full bg-white" />
+              </span>
+            </button>
+            <Transition name="dropdown-pop">
+              <div v-if="menuOpen" class="absolute right-0 top-[calc(100%+16px)] z-50 w-[min(260px,calc(100vw-32px))] border border-[#dddddd] bg-white p-3 text-[#333] shadow-2xl">
+                <NuxtLink v-for="item in navItems" :key="item.label" :to="item.to" class="block border-b border-[#eeeeee] px-3 py-3 text-sm font-medium last:border-b-0" @click="closeAll">
+                  {{ item.label }}
+                </NuxtLink>
+                <a class="mt-2 flex items-center gap-2 border-t border-[#eeeeee] px-3 py-3 text-sm font-medium" href="#" @click="closeAll">
+                  <IconUser class="size-5" />
+                  Log in
+                </a>
+              </div>
+            </Transition>
+          </div>
         </div>
       </div>
 
       <div class="px-5 pb-4 md:hidden">
         <div class="relative flex h-11 bg-white transition duration-200" :class="focusClass('search')">
-          <IconSearch class="ml-3 mt-3 size-5 text-[#777]" />
-          <input v-model="searchQuery" class="h-full w-full px-3 text-sm outline-none placeholder:text-[#777]" placeholder="Search..." @focus="toggleOverlay('search')" @keydown.enter.prevent="submitSearch" />
-          <button class="grid h-11 w-16 place-items-center bg-[#a9271e] text-xs font-bold text-white" @click="submitSearch">Search</button>
+          <input v-model="searchQuery" class="h-full w-full px-4 text-sm outline-none placeholder:text-[#777]" placeholder="Search" @focus="toggleOverlay('search')" @keydown.enter.prevent="submitSearch" />
+          <button class="grid h-11 w-16 place-items-center bg-brand-red text-white" aria-label="Search" @click="submitSearch"><IconSearch class="size-5" /></button>
         </div>
         <Transition name="dropdown-pop">
           <div v-if="searchOpen" class="relative z-50 mt-2 border border-[#dddddd] bg-white p-3 text-[#333] shadow-xl">
@@ -140,9 +134,9 @@
     </div>
 
     <nav class="border-b border-[#dedede] bg-white">
-      <div class="relative mx-auto flex max-w-[1920px] items-center gap-8 overflow-visible px-5 text-base sm:px-8 lg:px-12">
+      <div class="relative mx-auto flex max-w-[1920px] items-center gap-6 px-4 text-sm sm:gap-8 sm:px-8 sm:text-base lg:px-12">
         <div class="relative transition duration-200" :class="focusClass('category')">
-          <button class="relative flex h-14 items-center gap-2 whitespace-nowrap border-b-2 border-[#333] font-semibold" @click="toggleOverlay('category')">
+          <button class="relative flex h-14 items-center gap-2 whitespace-nowrap border-b-2 border-[#333] font-medium" @click="toggleOverlay('category')">
             Categories
             <IconChevronDown class="size-4 transition" :class="categoryOpen ? 'rotate-180' : ''" />
           </button>
@@ -174,7 +168,7 @@
             </div>
           </Transition>
         </div>
-        <NuxtLink v-for="item in navItems" :key="item.label" :to="item.to" class="whitespace-nowrap py-4 font-semibold transition hover:text-brand-red" :class="passiveHeaderClass">
+        <NuxtLink v-for="item in navItems" :key="item.label" :to="item.to" class="hidden whitespace-nowrap py-4 font-medium transition hover:text-brand-red sm:block" :class="passiveHeaderClass">
           {{ item.label }}
         </NuxtLink>
       </div>
@@ -192,14 +186,11 @@ const navItems = [
 const route = useRoute()
 const headerRef = ref<HTMLElement | null>(null)
 const activeCategory = ref(0)
-const languageOpen = ref(false)
 const cartOpen = ref(false)
 const searchOpen = ref(false)
 const categoryOpen = ref(false)
-const selectedLanguage = ref('English')
+const menuOpen = ref(false)
 const searchQuery = ref('')
-
-const languages = ['English', 'Bahasa Indonesia']
 
 const categories = [
   { name: 'Wine', children: ['Red Wine', 'White Wine', 'Rose Wine', 'Fortified Wine', 'Ice Wine'] },
@@ -237,21 +228,16 @@ const removeCartItem = (name: string) => {
   cartItems.value = cartItems.value.filter((item) => item.name !== name)
 }
 
-const selectLanguage = (language: string) => {
-  selectedLanguage.value = language
-  languageOpen.value = false
-}
-
-const isOverlayOpen = computed(() => languageOpen.value || cartOpen.value || searchOpen.value || categoryOpen.value)
+const isOverlayOpen = computed(() => cartOpen.value || searchOpen.value || categoryOpen.value || menuOpen.value)
 const activeOverlay = computed(() => {
-  if (languageOpen.value) return 'language'
   if (searchOpen.value) return 'search'
   if (cartOpen.value) return 'cart'
   if (categoryOpen.value) return 'category'
+  if (menuOpen.value) return 'menu'
   return ''
 })
 
-const focusClass = (name: 'language' | 'search' | 'cart' | 'category') => {
+const focusClass = (name: 'search' | 'cart' | 'category' | 'menu') => {
   if (!isOverlayOpen.value) return 'z-40'
   return activeOverlay.value === name ? 'z-50' : 'z-40 blur-sm opacity-55'
 }
@@ -259,24 +245,24 @@ const focusClass = (name: 'language' | 'search' | 'cart' | 'category') => {
 const passiveHeaderClass = computed(() => (isOverlayOpen.value ? 'blur-sm opacity-55' : ''))
 
 const closeAll = () => {
-  languageOpen.value = false
   cartOpen.value = false
   searchOpen.value = false
   categoryOpen.value = false
+  menuOpen.value = false
 }
 
-const toggleOverlay = (target: 'language' | 'search' | 'cart' | 'category') => {
+const toggleOverlay = (target: 'search' | 'cart' | 'category' | 'menu') => {
   const nextState = {
-    language: target === 'language' ? !languageOpen.value : false,
     search: target === 'search' ? !searchOpen.value : false,
     cart: target === 'cart' ? !cartOpen.value : false,
-    category: target === 'category' ? !categoryOpen.value : false
+    category: target === 'category' ? !categoryOpen.value : false,
+    menu: target === 'menu' ? !menuOpen.value : false
   }
 
-  languageOpen.value = nextState.language
   searchOpen.value = nextState.search
   cartOpen.value = nextState.cart
   categoryOpen.value = nextState.category
+  menuOpen.value = nextState.menu
 }
 
 const categoryPath = (name: string) => `/categories/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`
@@ -289,10 +275,10 @@ const goToCategory = async (name: string) => {
 const submitSearch = async () => {
   const keyword = searchQuery.value.trim()
   if (!keyword) {
-    languageOpen.value = false
     searchOpen.value = true
     cartOpen.value = false
     categoryOpen.value = false
+    menuOpen.value = false
     return
   }
 

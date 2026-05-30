@@ -23,23 +23,21 @@
       </div>
     </div>
 
-    <div class="absolute bottom-8 left-1/2 flex w-[56%] -translate-x-1/2 items-center gap-3">
+    <div class="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3">
       <button
         v-for="(slide, index) in slides"
         :key="slide.title"
-        class="h-1 flex-1 rounded-full transition"
+        class="size-3 rounded-full border border-white transition"
         :class="index === activeSlide ? 'bg-white' : 'bg-white/40'"
         :aria-label="`Go to slide ${index + 1}`"
         @click="activeSlide = index"
       />
-      <button class="ml-4 text-sm font-black text-white" @click="toggleAutoplay">{{ isPlaying ? 'II' : 'Play' }}</button>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 const activeSlide = ref(0)
-const isPlaying = ref(true)
 let timer: ReturnType<typeof setInterval> | undefined
 
 const slides = [
@@ -76,12 +74,6 @@ const startAutoplay = () => {
 
 const stopAutoplay = () => {
   if (timer) clearInterval(timer)
-}
-
-const toggleAutoplay = () => {
-  isPlaying.value = !isPlaying.value
-  stopAutoplay()
-  if (isPlaying.value) startAutoplay()
 }
 
 onMounted(startAutoplay)

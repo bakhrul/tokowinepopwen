@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,7 +14,7 @@ body {
 }
 
 ::selection {
-  background: #a0442c;
+  background: #6d28d9;
   color: #fffaf2;
 }
 
@@ -107,15 +107,15 @@ body {
 }
 
 .zoom-glow {
-  background: radial-gradient(circle at var(--zoom-x, 50%) var(--zoom-y, 50%), rgba(197, 40, 32, 0.08), transparent 22%);
+  background: radial-gradient(circle at var(--zoom-x, 50%) var(--zoom-y, 50%), rgba(109, 40, 217, 0.08), transparent 22%);
 }
 
 .wide-promo-bg {
   background:
-    linear-gradient(90deg, #c52820 0 40%, transparent 40%),
+    linear-gradient(90deg, #6d28d9 0 40%, transparent 40%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 31%, transparent 31%),
     radial-gradient(circle at 80% 65%, rgba(255, 255, 255, 0.35), transparent 28%),
-    linear-gradient(135deg, #e8f2f0, #8cc0c7 60%, #d93b35);
+    linear-gradient(135deg, #e8f2f0, #8cc0c7 60%, #6d28d9);
 }
 
 .local-promo-bg {
@@ -130,6 +130,12 @@ body {
     linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.1)),
     radial-gradient(circle at 70% 62%, rgba(255, 255, 255, 0.5), transparent 16%),
     linear-gradient(135deg, #233b2e, #8fc097 55%, #eac7bd);
+}
+
+.delivery-photo {
+  background-image:
+    linear-gradient(rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.08)),
+    url('https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1400&q=85');
 }
 
 .menu-fade-enter-active,

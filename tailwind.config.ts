@@ -10,19 +10,19 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         ink: '#17130f',
-        clay: '#a0442c',
+        clay: '#6d28d9',
         cork: '#f2e9d9',
         mist: '#f7f4ee',
         sage: '#596c5f',
-        'brand-red': '#c52820',
+        'brand-red': '#6d28d9',
         'brand-green': '#1f5c48'
       },
       boxShadow: {
         soft: '0 22px 70px rgba(31, 23, 16, 0.12)'
       },
       fontFamily: {
-        sans: ['Nunito Sans', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Fraunces', 'ui-serif', 'Georgia', 'serif']
+        sans: ['Jost', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Jost', 'ui-sans-serif', 'system-ui', 'sans-serif']
       }
     }
   }

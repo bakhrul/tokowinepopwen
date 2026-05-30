@@ -37,7 +37,7 @@
                 </div>
                 <div class="flex flex-col justify-end gap-3">
                   <button class="h-12 bg-[#e5f187] text-sm font-black uppercase tracking-wide text-brand-red transition hover:brightness-95">Add to Cart</button>
-                  <button class="h-12 bg-brand-red text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#a9271e]">Buy It Now</button>
+                  <button class="h-12 bg-brand-red text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#5b21b6]">Buy It Now</button>
                 </div>
               </div>
 
@@ -167,7 +167,7 @@ const recommendedProducts = [
 ]
 
 useSeoMeta({
-  title: `${product.name} - Cellarjak`,
+  title: `${product.name} - tokowinepop`,
   description: product.description
 })
 

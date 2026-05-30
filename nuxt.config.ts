@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   app: {
     head: {
-      title: 'Cellarjak - Curated Drinks Delivery',
+      title: 'tokowinepop - Curated Drinks Delivery',
       meta: [
         {
           name: 'description',

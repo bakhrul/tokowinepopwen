@@ -12,10 +12,10 @@
         />
       </div>
       <div class="mt-auto px-1 pb-3">
-        <p class="text-sm font-semibold text-[#8b8b8b]">{{ product.brand }}</p>
-        <h3 class="mt-2 min-h-[52px] text-lg font-semibold leading-snug text-[#333]">{{ product.name }}</h3>
-        <p class="mt-3 text-lg font-black text-[#333]">{{ product.price }}</p>
-        <p class="mt-5 flex items-center gap-2 text-sm font-semibold text-[#4e8b3d]">
+        <p class="text-sm font-medium text-[#8b8b8b]">{{ product.brand }}</p>
+        <h3 class="mt-2 min-h-[52px] text-lg font-medium leading-snug text-[#333]">{{ product.name }}</h3>
+        <p class="mt-3 text-lg font-bold text-[#333]">{{ product.price }}</p>
+        <p class="mt-5 flex items-center gap-2 text-sm font-medium text-[#4e8b3d]">
           <span class="size-2 rounded-full bg-[#4e8b3d]" />
           In stock
         </p>

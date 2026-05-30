@@ -1,7 +1,7 @@
 <template>
   <section :id="id" class="bg-white px-5 py-10 sm:px-8 lg:px-12">
     <div class="mx-auto max-w-[1920px]">
-      <h2 class="mb-6 text-center text-3xl font-black tracking-tight text-[#333] sm:text-4xl">{{ title }}</h2>
+      <h2 class="mb-6 text-center text-3xl font-bold tracking-tight text-[#333] sm:text-4xl">{{ title }}</h2>
       <div v-if="tabs?.length" class="mb-9 flex justify-center overflow-x-auto text-base">
         <div class="relative flex gap-10">
           <button
@@ -24,8 +24,8 @@
             <ProductCard v-for="product in visibleProducts" :key="`${activeTab}-${product.name}`" :product="product" />
           </TransitionGroup>
           <NuxtLink v-if="ctaTitle" to="/collections" class="relative flex min-h-[430px] flex-col border border-[#d8d8d8] bg-white p-8 transition hover:bg-[#fafafa]">
-            <p class="text-sm font-black uppercase tracking-[0.18em] text-brand-red">Show more</p>
-            <h3 class="mt-3 text-3xl font-black leading-tight text-[#333] sm:text-4xl">{{ ctaTitle }}</h3>
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-red">Show more</p>
+            <h3 class="mt-3 text-3xl font-bold leading-tight text-[#333] sm:text-4xl">{{ ctaTitle }}</h3>
             <p class="mt-4 text-lg text-[#333]">{{ ctaText }}</p>
             <span class="mt-auto grid size-12 place-items-center rounded-full bg-[#2b2b2b] text-3xl font-light text-white">&gt;</span>
           </NuxtLink>

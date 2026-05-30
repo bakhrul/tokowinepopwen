@@ -129,7 +129,7 @@ const sortedProducts = computed(() => {
 })
 
 useSeoMeta({
-  title: `${collection.value.title} - Cellarjak`,
+  title: `${collection.value.title} - tokowinepop`,
   description: collection.value.description
 })
 </script>

@@ -10,8 +10,8 @@
 
         <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
           <div>
-            <p class="text-xs font-black uppercase tracking-[0.24em] text-brand-red">Search</p>
-            <h1 class="mt-3 text-3xl font-black leading-tight text-[#333] sm:text-4xl">Search results</h1>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-brand-red">Search</p>
+            <h1 class="mt-3 text-3xl font-bold leading-tight text-[#333] sm:text-4xl">Search results</h1>
             <p class="mt-3 max-w-2xl text-sm leading-7 text-[#666]">
               <span v-if="queryText">Showing products related to "{{ queryText }}".</span>
               <span v-else>Type a keyword in the search bar to browse matching products.</span>
@@ -21,7 +21,7 @@
           <form class="flex h-12 overflow-hidden border border-[#dddddd] bg-white shadow-sm" @submit.prevent="updateKeyword">
             <IconSearch class="ml-4 mt-3.5 size-5 text-[#777]" />
             <input v-model="draftKeyword" class="h-full min-w-0 flex-1 px-4 text-sm outline-none" placeholder="Search wine, whisky, soju..." />
-            <button class="bg-brand-red px-5 text-sm font-black text-white transition hover:bg-[#5b21b6]">Search</button>
+            <button class="bg-brand-red px-5 text-sm font-semibold text-white transition hover:bg-[#5b21b6]">Search</button>
           </form>
         </div>
       </div>
@@ -31,7 +31,7 @@
       <div class="mx-auto max-w-[1920px]">
         <div class="mb-5 flex flex-col gap-4 border-y border-[#eeeeee] py-4 sm:flex-row sm:items-center sm:justify-between">
           <div class="flex items-center gap-3 text-sm text-[#666]">
-            <span class="inline-flex items-center gap-2 font-bold text-[#333]">
+            <span class="inline-flex items-center gap-2 font-medium text-[#333]">
               <IconFilter class="size-4" />
               Filters
             </span>
@@ -63,9 +63,9 @@
             </div>
 
             <div v-else class="rounded-lg border border-[#eeeeee] bg-[#fafafa] p-10 text-center">
-              <p class="text-lg font-black text-[#333]">No products found</p>
+              <p class="text-lg font-semibold text-[#333]">No products found</p>
               <p class="mt-2 text-sm leading-6 text-[#666]">Try another keyword or clear some filters.</p>
-              <button class="mt-5 bg-brand-red px-5 py-3 text-sm font-black text-white transition hover:bg-[#5b21b6]" @click="resetSearch">
+              <button class="mt-5 bg-brand-red px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#5b21b6]" @click="resetSearch">
                 Reset search
               </button>
             </div>

@@ -3,7 +3,7 @@
     <section class="relative h-[260px] overflow-hidden sm:h-[360px]">
       <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.5),rgba(0,0,0,.08)),radial-gradient(circle_at_78%_70%,rgba(118,18,31,.45),transparent_18%),linear-gradient(135deg,#405c2e,#e0a940_42%,#b85c32_70%,#512417)]" />
       <div class="relative mx-auto flex h-full max-w-[1920px] items-center px-5 sm:px-8 lg:px-12">
-        <h1 class="text-4xl font-black uppercase tracking-wide text-white drop-shadow sm:text-6xl">{{ collection.title }}</h1>
+        <h1 class="text-4xl font-bold uppercase tracking-wide text-white drop-shadow sm:text-6xl">{{ collection.title }}</h1>
       </div>
     </section>
 
@@ -16,9 +16,9 @@
         </nav>
 
         <div class="mb-8 max-w-3xl">
-          <h2 class="text-3xl font-black">{{ collection.title }}</h2>
+          <h2 class="text-3xl font-bold">{{ collection.title }}</h2>
           <p class="mt-3 text-sm leading-7 text-[#666]">{{ collection.description }}</p>
-          <button class="mt-2 text-sm font-bold underline underline-offset-4" @click="descriptionOpen = !descriptionOpen">
+          <button class="mt-2 text-sm font-medium underline underline-offset-4" @click="descriptionOpen = !descriptionOpen">
             {{ descriptionOpen ? 'Show less' : 'Show more' }}
           </button>
           <Transition name="category-slide">
@@ -30,7 +30,7 @@
 
         <div class="mb-5 flex flex-col gap-4 border-y border-[#eeeeee] py-4 sm:flex-row sm:items-center sm:justify-between">
           <div class="flex items-center gap-3 text-sm text-[#666]">
-            <span class="inline-flex items-center gap-2 font-bold text-[#333]">
+            <span class="inline-flex items-center gap-2 font-medium text-[#333]">
               <IconFilter class="size-4" />
               Filters
             </span>

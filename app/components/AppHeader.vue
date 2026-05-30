@@ -26,14 +26,14 @@
           <Transition name="dropdown-pop">
             <div v-if="searchOpen" class="absolute left-0 right-0 top-[calc(100%+8px)] z-50 border border-[#dddddd] bg-white p-4 text-[#333] shadow-2xl">
               <div class="mb-3 flex items-center justify-between">
-                <p class="text-sm font-black uppercase tracking-wide text-[#777]">{{ searchQuery ? 'Search results' : 'Popular searches' }}</p>
-                <button class="text-sm font-bold text-brand-red" @click="searchOpen = false">Close</button>
+                <p class="text-sm font-semibold uppercase tracking-wide text-[#777]">{{ searchQuery ? 'Search results' : 'Popular searches' }}</p>
+                <button class="text-sm font-medium text-brand-red" @click="searchOpen = false">Close</button>
               </div>
               <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 <NuxtLink v-for="item in filteredSuggestions" :key="item.name" :to="item.slug" class="flex items-center gap-3 rounded border border-[#eeeeee] p-3 transition hover:border-brand-red/40 hover:bg-[#fafafa]" @click="searchOpen = false">
                   <span class="product-bottle relative block h-14 w-5 shrink-0 rounded-b rounded-t-full" :style="`--bottle:${item.color}`" />
                   <span>
-                    <span class="block text-sm font-bold">{{ item.name }}</span>
+                    <span class="block text-sm font-medium">{{ item.name }}</span>
                     <span class="text-xs text-[#777]">{{ item.category }}</span>
                   </span>
                 </NuxtLink>
@@ -58,14 +58,14 @@
             <Transition name="dropdown-pop">
               <div v-if="cartOpen" class="absolute right-0 top-[calc(100%+16px)] z-50 w-[min(360px,calc(100vw-32px))] border border-[#dddddd] bg-white p-4 text-[#333] shadow-2xl">
                 <div class="mb-3 flex items-center justify-between">
-                  <h3 class="font-black">Shopping Cart</h3>
-                  <button class="text-sm font-bold text-brand-red" @click="cartOpen = false">Close</button>
+                  <h3 class="font-bold">Shopping Cart</h3>
+                  <button class="text-sm font-medium text-brand-red" @click="cartOpen = false">Close</button>
                 </div>
                 <div v-if="cartItems.length" class="space-y-3">
                   <div v-for="item in cartItems" :key="item.name" class="flex gap-3 border-b border-[#eeeeee] pb-3">
                     <span class="product-bottle relative mt-1 block h-16 w-6 shrink-0 rounded-b rounded-t-full" :style="`--bottle:${item.color}`" />
                     <div class="min-w-0 flex-1">
-                      <p class="truncate text-sm font-bold">{{ item.name }}</p>
+                      <p class="truncate text-sm font-medium">{{ item.name }}</p>
                       <p class="mt-1 text-sm text-[#777]">{{ item.qty }} x {{ formatRupiah(item.price) }}</p>
                     </div>
                     <button aria-label="Remove item" class="text-[#777] transition hover:text-brand-red" @click="removeCartItem(item.name)">
@@ -77,12 +77,12 @@
                   Your cart is empty.
                 </div>
                 <div class="mt-4 flex items-center justify-between text-sm">
-                  <span class="font-bold">Subtotal</span>
-                  <span class="font-black">{{ subtotal }}</span>
+                  <span class="font-medium">Subtotal</span>
+                  <span class="font-semibold">{{ subtotal }}</span>
                 </div>
                 <div class="mt-4 grid grid-cols-2 gap-3">
-                  <NuxtLink to="/cart" class="border border-[#333] px-4 py-3 text-center text-sm font-black" @click="closeAll">View Cart</NuxtLink>
-                  <a href="#" class="bg-brand-red px-4 py-3 text-center text-sm font-black text-white">Checkout</a>
+                  <NuxtLink to="/cart" class="border border-[#333] px-4 py-3 text-center text-sm font-semibold" @click="closeAll">View Cart</NuxtLink>
+                  <a href="#" class="bg-brand-red px-4 py-3 text-center text-sm font-semibold text-white">Checkout</a>
                 </div>
               </div>
             </Transition>
@@ -118,13 +118,13 @@
         <Transition name="dropdown-pop">
           <div v-if="searchOpen" class="relative z-50 mt-2 border border-[#dddddd] bg-white p-3 text-[#333] shadow-xl">
             <div class="mb-2 flex items-center justify-between">
-              <p class="text-xs font-black uppercase tracking-wide text-[#777]">{{ searchQuery ? 'Search results' : 'Popular searches' }}</p>
-              <button class="text-xs font-bold text-brand-red" @click="searchOpen = false">Close</button>
+              <p class="text-xs font-semibold uppercase tracking-wide text-[#777]">{{ searchQuery ? 'Search results' : 'Popular searches' }}</p>
+              <button class="text-xs font-medium text-brand-red" @click="searchOpen = false">Close</button>
             </div>
             <NuxtLink v-for="item in filteredSuggestions" :key="item.name" :to="item.slug" class="flex items-center gap-3 rounded border-b border-[#eeeeee] py-3 last:border-b-0" @click="searchOpen = false">
               <span class="product-bottle relative block h-12 w-5 shrink-0 rounded-b rounded-t-full" :style="`--bottle:${item.color}`" />
               <span>
-                <span class="block text-sm font-bold">{{ item.name }}</span>
+                <span class="block text-sm font-medium">{{ item.name }}</span>
                 <span class="text-xs text-[#777]">{{ item.category }}</span>
               </span>
             </NuxtLink>

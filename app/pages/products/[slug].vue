@@ -14,8 +14,8 @@
           <div class="reveal">
             <div class="flex flex-col gap-4 border-b border-[#dddddd] pb-6 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <p class="mb-2 text-sm font-bold uppercase tracking-wide text-brand-red">{{ product.category }}</p>
-                <h1 class="text-3xl font-black leading-tight sm:text-4xl">{{ product.name }}</h1>
+                <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-brand-red">{{ product.category }}</p>
+                <h1 class="text-3xl font-bold leading-tight sm:text-4xl">{{ product.name }}</h1>
                 <p class="mt-2 text-sm text-[#777]">SKU: {{ product.sku }}</p>
               </div>
               <div class="flex items-center gap-2 text-sm text-[#777]">
@@ -25,44 +25,44 @@
             </div>
 
             <div class="py-6">
-              <p class="text-2xl font-black">{{ product.price }}</p>
+              <p class="text-2xl font-bold">{{ product.price }}</p>
               <div class="mt-6 grid gap-3 sm:grid-cols-[140px_1fr]">
                 <div>
-                  <p class="mb-2 text-sm font-bold">Quantity</p>
+                  <p class="mb-2 text-sm font-medium">Quantity</p>
                   <div class="flex h-12 border border-[#cfcfcf]">
                     <button class="grid w-12 place-items-center text-xl transition hover:bg-[#fafafa]" @click="quantity = Math.max(1, quantity - 1)">-</button>
-                    <span class="grid flex-1 place-items-center font-bold">{{ quantity }}</span>
+                    <span class="grid flex-1 place-items-center font-medium">{{ quantity }}</span>
                     <button class="grid w-12 place-items-center text-xl transition hover:bg-[#fafafa]" @click="quantity++">+</button>
                   </div>
                 </div>
                 <div class="flex flex-col justify-end gap-3">
-                  <button class="h-12 bg-[#e5f187] text-sm font-black uppercase tracking-wide text-brand-red transition hover:brightness-95">Add to Cart</button>
-                  <button class="h-12 bg-brand-red text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#5b21b6]">Buy It Now</button>
+                  <button class="h-12 bg-[#e5f187] text-sm font-semibold uppercase tracking-wide text-brand-red transition hover:brightness-95">Add to Cart</button>
+                  <button class="h-12 bg-brand-red text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-[#5b21b6]">Buy It Now</button>
                 </div>
               </div>
 
               <div class="mt-6 rounded-lg bg-[#f8fbf7] p-4">
-                <p class="flex items-center gap-2 font-bold text-[#3d8a4d]">
+                <p class="flex items-center gap-2 font-medium text-[#3d8a4d]">
                   <IconCheck class="size-5" />
                   Pickup available at CELLARJAK KG
                 </p>
                 <p class="mt-1 text-sm text-[#777]">In stock, usually ready in 1 hour.</p>
-                <a href="#" class="mt-3 inline-block text-sm font-bold underline underline-offset-4">Check availability at other stores</a>
+                <a href="#" class="mt-3 inline-block text-sm font-medium underline underline-offset-4">Check availability at other stores</a>
               </div>
 
               <div class="mt-5 flex flex-wrap gap-3">
-                <button class="inline-flex items-center gap-2 border border-[#dddddd] px-4 py-3 text-sm font-bold transition hover:border-brand-red hover:text-brand-red" @click="shareProduct">
+                <button class="inline-flex items-center gap-2 border border-[#dddddd] px-4 py-3 text-sm font-medium transition hover:border-brand-red hover:text-brand-red" @click="shareProduct">
                   <IconShare class="size-4" />
                   Share this
                 </button>
-                <NuxtLink to="/" class="inline-flex items-center gap-2 border border-[#dddddd] px-4 py-3 text-sm font-bold transition hover:border-brand-red hover:text-brand-red">
+                <NuxtLink to="/" class="inline-flex items-center gap-2 border border-[#dddddd] px-4 py-3 text-sm font-medium transition hover:border-brand-red hover:text-brand-red">
                   Continue shopping
                 </NuxtLink>
               </div>
             </div>
 
             <div class="border border-[#dddddd]">
-              <button class="flex w-full items-center justify-between px-5 py-4 text-left font-black" @click="descriptionOpen = !descriptionOpen">
+              <button class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold" @click="descriptionOpen = !descriptionOpen">
                 Description
                 <IconChevronDown class="size-5 transition" :class="descriptionOpen ? 'rotate-180' : ''" />
               </button>
@@ -70,7 +70,7 @@
                 <div v-if="descriptionOpen" class="px-5 pb-5 text-sm leading-7 text-[#555]">
                   <dl class="mb-5 grid gap-x-6 gap-y-1 sm:grid-cols-[120px_1fr]">
                     <template v-for="meta in product.meta" :key="meta.label">
-                      <dt class="font-bold text-[#333]">{{ meta.label }}</dt>
+                      <dt class="font-medium text-[#333]">{{ meta.label }}</dt>
                       <dd>{{ meta.value }}</dd>
                     </template>
                   </dl>
@@ -90,7 +90,7 @@
             <IconCheck class="size-5" />
           </span>
           <div>
-            <h3 class="text-lg font-black">{{ benefit.title }}</h3>
+            <h3 class="text-lg font-semibold">{{ benefit.title }}</h3>
             <p class="mt-1 text-sm leading-6 text-[#666]">{{ benefit.copy }}</p>
           </div>
         </div>
@@ -99,14 +99,14 @@
 
     <section class="px-5 py-10 sm:px-8 lg:px-12">
       <div class="mx-auto max-w-[1920px]">
-        <h2 class="mb-6 text-2xl font-black sm:text-3xl">You may also like</h2>
+        <h2 class="mb-6 text-2xl font-bold sm:text-3xl">You may also like</h2>
         <div class="grid gap-4 sm:grid-cols-3">
           <NuxtLink v-for="item in mayLike" :key="item.name" :to="item.slug" class="group flex items-center gap-4 border border-[#dddddd] p-4 transition hover:-translate-y-1 hover:border-brand-red/40 hover:shadow-lg">
             <span class="product-bottle relative block h-24 w-9 shrink-0 rounded-b rounded-t-full transition group-hover:-translate-y-1" :style="`--bottle:${item.color}`" />
             <span>
-              <span class="block text-sm font-semibold text-[#777]">{{ item.brand }}</span>
-              <span class="mt-1 block font-bold">{{ item.name }}</span>
-              <span class="mt-2 block font-black">{{ item.price }}</span>
+              <span class="block text-sm font-medium text-[#777]">{{ item.brand }}</span>
+              <span class="mt-1 block font-medium">{{ item.name }}</span>
+              <span class="mt-2 block font-semibold">{{ item.price }}</span>
             </span>
           </NuxtLink>
         </div>

@@ -1,13 +1,13 @@
 <template>
   <div class="rounded-lg border border-[#eeeeee] bg-white p-4 shadow-sm">
     <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-sm font-black uppercase tracking-wide">Filters</h2>
-      <button class="text-xs font-bold text-brand-red" @click="clearFilters">Clear</button>
+      <h2 class="text-sm font-semibold uppercase tracking-wide">Filters</h2>
+      <button class="text-xs font-medium text-brand-red" @click="clearFilters">Clear</button>
     </div>
 
     <div class="space-y-3">
       <div v-for="filter in filters" :key="filter.title" class="border-b border-[#eeeeee] pb-3 last:border-b-0 last:pb-0">
-        <button class="flex w-full items-center justify-between py-2 text-left font-bold" @click="toggle(filter.title)">
+        <button class="flex w-full items-center justify-between py-2 text-left font-medium" @click="toggle(filter.title)">
           {{ filter.title }}
           <IconChevronDown class="size-4 transition" :class="openFilters.includes(filter.title) ? 'rotate-180' : ''" />
         </button>

@@ -2,7 +2,7 @@
   <section class="px-5 py-12 sm:px-8 lg:px-12">
     <div class="mx-auto max-w-[1920px]">
       <div class="mb-8 flex items-center justify-between gap-4">
-        <h2 class="text-2xl font-black sm:text-3xl">{{ title }}</h2>
+        <h2 class="text-2xl font-bold sm:text-3xl">{{ title }}</h2>
         <div class="flex gap-2">
           <button class="grid size-10 place-items-center rounded-full border border-[#dddddd] transition hover:border-brand-red hover:text-brand-red" aria-label="Previous products" @click="previous">
             <IconChevronRight class="size-5 rotate-180" />

@@ -10,7 +10,7 @@
         <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p class="text-sm font-bold uppercase tracking-[0.2em] text-brand-red">Browse by brand</p>
-            <h1 class="mt-2 text-3xl font-black sm:text-4xl">Collections</h1>
+            <h1 class="mt-2 text-3xl font-bold sm:text-4xl">Collections</h1>
           </div>
           <p class="max-w-xl text-sm leading-6 text-[#666]">
             Explore curated brand shelves with a cleaner grid, quick scanning, and smooth hover states.
@@ -25,25 +25,25 @@
           v-for="brand in brands"
           :key="brand.name"
           :to="brand.to"
-          class="group grid min-h-64 place-items-center bg-white p-8 text-center transition duration-300 hover:z-10 hover:-translate-y-1 hover:shadow-xl"
+          class="group grid min-h-60 min-w-0 place-items-center overflow-hidden bg-white p-6 text-center transition duration-300 hover:z-10 hover:-translate-y-1 hover:shadow-xl"
         >
-          <div class="w-full">
-            <div :class="['mx-auto flex h-28 w-full max-w-[260px] items-center justify-center rounded-lg border border-[#eeeeee] bg-white px-5 shadow-sm transition group-hover:border-brand-red/30', brand.logoTone]">
-              <div v-if="brand.logoStyle === 'seal'" class="grid size-20 place-items-center rounded-full border-4 border-current text-3xl font-black">
+          <div class="min-w-0 w-full">
+            <div :class="['mx-auto flex h-24 w-full max-w-[220px] items-center justify-center overflow-hidden bg-white px-4 transition', brand.logoTone]">
+              <div v-if="brand.logoStyle === 'seal'" class="grid size-16 place-items-center rounded-full border-4 border-current text-2xl font-black">
                 {{ brand.initials }}
               </div>
-              <div v-else-if="brand.logoStyle === 'script'" class="font-display text-4xl font-bold italic leading-none">
+              <div v-else-if="brand.logoStyle === 'script'" class="max-w-full truncate font-display text-3xl font-bold italic leading-none">
                 {{ brand.shortName }}
               </div>
-              <div v-else-if="brand.logoStyle === 'stack'" class="text-center">
-                <span class="block text-3xl font-black uppercase leading-none tracking-[0.18em]">{{ brand.shortName }}</span>
-                <span class="mt-2 block text-xs font-bold uppercase tracking-[0.28em] opacity-60">Reserve</span>
+              <div v-else-if="brand.logoStyle === 'stack'" class="max-w-full overflow-hidden text-center">
+                <span class="block max-w-full truncate text-xl font-black uppercase leading-none tracking-[0.1em]">{{ brand.shortName }}</span>
+                <span class="mt-2 block text-[10px] font-bold uppercase tracking-[0.24em] opacity-60">Reserve</span>
               </div>
-              <div v-else class="text-4xl font-black uppercase tracking-tight">
+              <div v-else class="max-w-full truncate text-2xl font-black uppercase tracking-tight">
                 {{ brand.shortName }}
               </div>
             </div>
-            <h2 class="mt-5 text-base font-black uppercase tracking-wide">{{ brand.name }}</h2>
+            <h2 class="mt-5 text-base font-semibold text-[#333]">{{ brand.name }}</h2>
           </div>
         </NuxtLink>
       </div>

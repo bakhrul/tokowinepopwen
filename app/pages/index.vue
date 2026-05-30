@@ -16,6 +16,11 @@
 </template>
 
 <script setup lang="ts">
+import beerOffer from '~/assets/images/offers/beer.jpg'
+import bundlesOffer from '~/assets/images/offers/bundles.jpg'
+import spiritsOffer from '~/assets/images/offers/spirits.jpg'
+import wineOffer from '~/assets/images/offers/wine.jpg'
+
 const categories = [
   {
     name: 'Spirits',
@@ -80,19 +85,19 @@ const categories = [
 const offers = [
   {
     title: 'Spirits',
-    image: 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?auto=format&fit=crop&w=700&q=85'
+    image: spiritsOffer
   },
   {
     title: 'Wine',
-    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=85'
+    image: wineOffer
   },
   {
     title: 'Beer',
-    image: 'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=700&q=85'
+    image: beerOffer
   },
   {
     title: 'Bundles',
-    image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=700&q=85'
+    image: bundlesOffer
   }
 ]
 

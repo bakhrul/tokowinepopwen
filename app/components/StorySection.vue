@@ -1,7 +1,7 @@
 <template>
   <section class="bg-brand-red text-white">
     <div class="mx-auto grid max-w-[1920px] lg:grid-cols-2 lg:items-stretch">
-      <div class="delivery-photo min-h-[360px] bg-cover bg-center lg:min-h-[520px]">
+      <div class="min-h-[360px] bg-cover bg-center lg:min-h-[520px]" :style="{ backgroundImage: `linear-gradient(rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.08)), url(${deliveryImage})` }">
         <span class="sr-only">Instant delivery courier</span>
       </div>
 
@@ -21,3 +21,7 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import deliveryImage from '~/assets/images/story/delivery.jpg'
+</script>

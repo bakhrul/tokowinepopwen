@@ -32,7 +32,7 @@
             <img v-if="item.logo" :src="item.logo" :alt="item.name" class="max-h-8 max-w-[110px] object-contain brightness-0 invert" />
             <span v-else class="text-xl font-black tracking-tight">{{ item.name }}</span>
           </div>
-          <img src="/images/payments/qris.svg" alt="QRIS" class="col-span-2 mt-1 max-h-12 max-w-[220px] object-contain brightness-0 invert" />
+          <img :src="qrisLogo" alt="QRIS" class="col-span-2 mt-1 max-h-12 max-w-[220px] object-contain brightness-0 invert" />
         </div>
       </div>
     </div>
@@ -40,16 +40,26 @@
 </template>
 
 <script setup lang="ts">
+import bcaLogo from '~/assets/images/payments/bca.svg'
+import bniLogo from '~/assets/images/payments/bni.svg'
+import briLogo from '~/assets/images/payments/bri.svg'
+import danaLogo from '~/assets/images/payments/dana.svg'
+import gopayLogo from '~/assets/images/payments/gopay.svg'
+import jeniusLogo from '~/assets/images/payments/jenius.svg'
+import mandiriLogo from '~/assets/images/payments/mandiri.svg'
+import ovoLogo from '~/assets/images/payments/ovo.svg'
+import qrisLogo from '~/assets/images/payments/qris.svg'
+
 const about = ['About Our Store', 'Find Us', 'Privacy Policy', 'Terms and Conditions']
 const social = ['Instagram', 'Facebook', 'Tiktok']
 const payments = [
-  { name: 'BCA', logo: '/images/payments/bca.svg' },
-  { name: 'BNI', logo: '/images/payments/bni.svg' },
-  { name: 'BANK BRI', logo: '/images/payments/bri.svg' },
-  { name: 'mandiri', logo: '/images/payments/mandiri.svg' },
-  { name: 'gopay', logo: '/images/payments/gopay.svg' },
-  { name: 'OVO', logo: '/images/payments/ovo.svg' },
-  { name: 'Jenius', logo: '/images/payments/jenius.svg' },
-  { name: 'DANA', logo: '/images/payments/dana.svg' }
+  { name: 'BCA', logo: bcaLogo },
+  { name: 'BNI', logo: bniLogo },
+  { name: 'BANK BRI', logo: briLogo },
+  { name: 'mandiri', logo: mandiriLogo },
+  { name: 'gopay', logo: gopayLogo },
+  { name: 'OVO', logo: ovoLogo },
+  { name: 'Jenius', logo: jeniusLogo },
+  { name: 'DANA', logo: danaLogo }
 ]
 </script>

@@ -132,12 +132,6 @@ body {
     linear-gradient(135deg, #233b2e, #8fc097 55%, #eac7bd);
 }
 
-.delivery-photo {
-  background-image:
-    linear-gradient(rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.08)),
-    url('https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=1400&q=85');
-}
-
 .menu-fade-enter-active,
 .menu-fade-leave-active,
 .category-slide-enter-active,

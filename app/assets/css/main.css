@@ -14,7 +14,7 @@ body {
 }
 
 ::selection {
-  background: #6d28d9;
+  background: #6620d5;
   color: #fffaf2;
 }
 
@@ -107,15 +107,15 @@ body {
 }
 
 .zoom-glow {
-  background: radial-gradient(circle at var(--zoom-x, 50%) var(--zoom-y, 50%), rgba(109, 40, 217, 0.08), transparent 22%);
+  background: radial-gradient(circle at var(--zoom-x, 50%) var(--zoom-y, 50%), rgba(102, 32, 213, 0.08), transparent 22%);
 }
 
 .wide-promo-bg {
   background:
-    linear-gradient(90deg, #6d28d9 0 40%, transparent 40%),
+    linear-gradient(90deg, #6620d5 0 40%, transparent 40%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 31%, transparent 31%),
     radial-gradient(circle at 80% 65%, rgba(255, 255, 255, 0.35), transparent 28%),
-    linear-gradient(135deg, #e8f2f0, #8cc0c7 60%, #6d28d9);
+    linear-gradient(135deg, #e8f2f0, #8cc0c7 60%, #6620d5);
 }
 
 .local-promo-bg {
@@ -130,6 +130,27 @@ body {
     linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.1)),
     radial-gradient(circle at 70% 62%, rgba(255, 255, 255, 0.5), transparent 16%),
     linear-gradient(135deg, #233b2e, #8fc097 55%, #eac7bd);
+}
+
+.delivery-content,
+.delivery-content * {
+  color: #fff !important;
+}
+
+.delivery-content h2 {
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.delivery-content p {
+  font-size: 1.125rem;
+  line-height: 1.625;
+  margin-top: 1.5rem;
+}
+
+.product-description p + p {
+  margin-top: 1rem;
 }
 
 .menu-fade-enter-active,

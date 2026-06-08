@@ -46,9 +46,12 @@ const props = defineProps<{
     brand: string
     name: string
     price: string
+    currentPrice?: string
+    originalPrice?: string
     color: string
     size?: string
     slug?: string
+    imageUrl?: string
   }>
 }>()
 

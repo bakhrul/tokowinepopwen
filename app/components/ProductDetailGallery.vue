@@ -3,12 +3,13 @@
     <div class="flex gap-3 overflow-x-auto md:flex-col">
       <button
         v-for="(image, index) in images"
-        :key="image.label"
+        :key="image.label || image.imageUrl || index"
         class="grid size-20 shrink-0 place-items-center border bg-white transition hover:border-brand-red"
         :class="activeImage === index ? 'border-[#333] ring-1 ring-[#333]' : 'border-[#dddddd]'"
         @click="activeImage = index"
       >
-        <span class="product-bottle relative block h-12 w-5 rounded-b rounded-t-full" :style="`--bottle:${image.color}`" />
+        <img v-if="image.imageUrl" :src="image.imageUrl" :alt="image.label" class="max-h-16 max-w-full object-contain" loading="lazy" />
+        <span v-else class="product-bottle relative block h-12 w-5 rounded-b rounded-t-full" :style="`--bottle:${image.color}`" />
       </button>
     </div>
 
@@ -19,7 +20,16 @@
       @click="zoomOpen = true"
     >
       <div class="zoom-glow absolute inset-0 opacity-0 transition group-hover:opacity-100" />
+      <img
+        v-if="images[activeImage].imageUrl"
+        :src="images[activeImage].imageUrl"
+        :alt="images[activeImage].label"
+        class="relative max-h-[460px] max-w-full object-contain transition duration-300"
+        :class="isZooming ? 'scale-125' : 'scale-100'"
+        :style="`transform-origin:${zoomX}% ${zoomY}%`"
+      />
       <div
+        v-else
         class="product-bottle relative h-[420px] w-32 rounded-b-xl rounded-t-full shadow-2xl transition duration-300"
         :class="isZooming ? 'scale-125' : 'scale-100'"
         :style="`--bottle:${images[activeImage].color}; transform-origin:${zoomX}% ${zoomY}%`"
@@ -35,7 +45,8 @@
           <IconX class="size-5" />
         </button>
         <div class="grid h-[min(760px,84vh)] w-full max-w-4xl place-items-center rounded bg-white">
-          <div class="product-bottle relative h-[min(620px,72vh)] w-44 rounded-b-xl rounded-t-full shadow-2xl" :style="`--bottle:${images[activeImage].color}`" />
+          <img v-if="images[activeImage].imageUrl" :src="images[activeImage].imageUrl" :alt="images[activeImage].label" class="max-h-[min(680px,78vh)] max-w-full object-contain" />
+          <div v-else class="product-bottle relative h-[min(620px,72vh)] w-44 rounded-b-xl rounded-t-full shadow-2xl" :style="`--bottle:${images[activeImage].color}`" />
         </div>
       </div>
     </Transition>
@@ -43,12 +54,15 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   images: Array<{
     label: string
     color: string
+    imageUrl?: string
   }>
 }>()
+
+const images = computed(() => props.images)
 
 const activeImage = ref(0)
 const zoomOpen = ref(false)
@@ -71,4 +85,9 @@ const resetZoom = () => {
   zoomX.value = 50
   zoomY.value = 50
 }
+
+watch(() => props.images.length, () => {
+  activeImage.value = 0
+  resetZoom()
+})
 </script>

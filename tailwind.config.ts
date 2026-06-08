@@ -10,11 +10,11 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         ink: '#17130f',
-        clay: '#6d28d9',
+        clay: '#6620d5',
         cork: '#f2e9d9',
         mist: '#f7f4ee',
         sage: '#596c5f',
-        'brand-red': '#6d28d9',
+        'brand-red': '#6620d5',
         'brand-green': '#1f5c48'
       },
       boxShadow: {

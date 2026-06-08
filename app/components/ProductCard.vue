@@ -5,7 +5,9 @@
     </button>
     <NuxtLink :to="productPath" class="contents" :aria-label="`View ${product.name}`">
       <div class="grid h-[250px] place-items-center overflow-hidden">
+        <img v-if="product.imageUrl" :src="product.imageUrl" :alt="product.name" class="max-h-[230px] max-w-full object-contain transition duration-500 group-hover:-translate-y-2" loading="lazy" />
         <div
+          v-else
           class="product-bottle relative rounded-b-lg rounded-t-full shadow-xl transition duration-500 group-hover:-translate-y-2"
           :class="product.size || 'h-64 w-20'"
           :style="`--bottle:${product.color}`"
@@ -14,7 +16,10 @@
       <div class="mt-auto px-1 pb-3">
         <p class="text-sm font-medium text-[#8b8b8b]">{{ product.brand }}</p>
         <h3 class="mt-2 min-h-[52px] text-lg font-medium leading-snug text-[#333]">{{ product.name }}</h3>
-        <p class="mt-3 text-lg font-bold text-[#333]">{{ product.price }}</p>
+        <div class="mt-3 min-h-[52px]">
+          <p v-if="product.originalPrice" class="text-sm font-semibold text-[#999] line-through">{{ product.originalPrice }}</p>
+          <p class="text-lg font-bold text-[#333]">{{ product.currentPrice || product.price }}</p>
+        </div>
         <p class="mt-5 flex items-center gap-2 text-sm font-medium text-[#4e8b3d]">
           <span class="size-2 rounded-full bg-[#4e8b3d]" />
           In stock
@@ -30,9 +35,12 @@ const props = defineProps<{
     brand: string
     name: string
     price: string
+    currentPrice?: string
+    originalPrice?: string
     color: string
     size?: string
     slug?: string
+    imageUrl?: string
   }
 }>()
 

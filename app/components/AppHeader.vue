@@ -5,8 +5,8 @@
     </Transition>
     <div class="bg-brand-red">
       <div class="mx-auto flex max-w-[1920px] items-center gap-3 px-4 py-4 sm:gap-4 sm:px-8 lg:px-12">
-        <NuxtLink to="/" class="min-w-0 shrink truncate text-[1.35rem] font-light tracking-[0.04em] text-white transition duration-200 sm:shrink-0 sm:text-4xl sm:tracking-[0.08em]" :class="passiveHeaderClass" aria-label="tokowinepop home">
-          tokowinepop
+        <NuxtLink to="/" class="flex h-10 min-w-0 shrink-0 items-center transition duration-200 sm:h-12" :class="passiveHeaderClass" aria-label="tokowinepop home">
+          <img src="/logo-white.png" alt="tokowinepop" class="h-8 w-auto object-contain sm:h-10" />
         </NuxtLink>
 
         <div class="relative hidden h-12 flex-1 items-center bg-white transition duration-200 md:flex" :class="focusClass('search')">
@@ -178,9 +178,8 @@
 
 <script setup lang="ts">
 const navItems = [
-  { label: 'Deals', to: '#' },
+  { label: 'Best Seller', to: '#' },
   { label: 'Brands', to: '/collections' },
-  { label: 'Guides', to: '#' },
   { label: 'Contact', to: '/contact' }
 ]
 const route = useRoute()
@@ -192,13 +191,23 @@ const categoryOpen = ref(false)
 const menuOpen = ref(false)
 const searchQuery = ref('')
 
-const categories = [
+const { data: apiCategories } = await useAsyncData('tokowine-categories', fetchTokowineCategories)
+
+const fallbackCategories = [
   { name: 'Wine', children: ['Red Wine', 'White Wine', 'Rose Wine', 'Fortified Wine', 'Ice Wine'] },
   { name: 'Champagne & Sparkling', children: ['Champagne', 'Prosecco', 'Cava', 'Sparkling Rose'] },
   { name: 'Spirits', children: ['Whisky', 'Vodka', 'Gin', 'Rum', 'Tequila', 'Brandy'] },
   { name: 'Glassware', children: ['Wine Glasses', 'Whisky Glasses', 'Decanter', 'Bar Tools'] },
   { name: 'Other', children: ['Sake', 'Beer & Cider', 'Non Alcoholic', 'Local Pride'] }
 ]
+
+const categories = computed(() => {
+  if (!apiCategories.value?.length) return fallbackCategories
+  return apiCategories.value.map((category) => ({
+    name: category.category,
+    children: category.subcategory.map((item) => item.subcategory)
+  }))
+})
 
 const suggestions = [
   { name: 'McDonald Vodka Mix 1000ml', category: 'Spirits', color: '#f0bd2f', slug: '/products/mcdonald-vodka-mix-1000ml' },

@@ -1,12 +1,5 @@
 <template>
   <main class="bg-white">
-    <section class="relative h-[260px] overflow-hidden sm:h-[360px]">
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.5),rgba(0,0,0,.08)),radial-gradient(circle_at_78%_70%,rgba(118,18,31,.45),transparent_18%),linear-gradient(135deg,#405c2e,#e0a940_42%,#b85c32_70%,#512417)]" />
-      <div class="relative mx-auto flex h-full max-w-[1920px] items-center px-5 sm:px-8 lg:px-12">
-        <h1 class="text-4xl font-bold uppercase tracking-wide text-white drop-shadow sm:text-6xl">{{ collection.title }}</h1>
-      </div>
-    </section>
-
     <section class="px-5 py-8 sm:px-8 lg:px-12">
       <div class="mx-auto max-w-[1920px]">
         <nav class="mb-5 flex items-center gap-2 text-sm text-[#777]">
@@ -132,4 +125,6 @@ useSeoMeta({
   title: `${collection.value.title} - tokowinepop`,
   description: collection.value.description
 })
+
+
 </script>

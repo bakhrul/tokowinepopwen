@@ -25,7 +25,10 @@
             </div>
 
             <div class="py-6">
-              <p class="text-2xl font-bold">{{ product.price }}</p>
+              <div>
+                <p v-if="product.originalPrice" class="text-base font-semibold text-[#999] line-through">{{ product.originalPrice }}</p>
+                <p class="text-2xl font-bold">{{ product.currentPrice || product.price }}</p>
+              </div>
               <div class="mt-6 grid gap-3 sm:grid-cols-[140px_1fr]">
                 <div>
                   <p class="mb-2 text-sm font-medium">Quantity</p>
@@ -41,20 +44,7 @@
                 </div>
               </div>
 
-              <div class="mt-6 rounded-lg bg-[#f8fbf7] p-4">
-                <p class="flex items-center gap-2 font-medium text-[#3d8a4d]">
-                  <IconCheck class="size-5" />
-                  Pickup available at CELLARJAK KG
-                </p>
-                <p class="mt-1 text-sm text-[#777]">In stock, usually ready in 1 hour.</p>
-                <a href="#" class="mt-3 inline-block text-sm font-medium underline underline-offset-4">Check availability at other stores</a>
-              </div>
-
               <div class="mt-5 flex flex-wrap gap-3">
-                <button class="inline-flex items-center gap-2 border border-[#dddddd] px-4 py-3 text-sm font-medium transition hover:border-brand-red hover:text-brand-red" @click="shareProduct">
-                  <IconShare class="size-4" />
-                  Share this
-                </button>
                 <NuxtLink to="/" class="inline-flex items-center gap-2 border border-[#dddddd] px-4 py-3 text-sm font-medium transition hover:border-brand-red hover:text-brand-red">
                   Continue shopping
                 </NuxtLink>
@@ -74,7 +64,7 @@
                       <dd>{{ meta.value }}</dd>
                     </template>
                   </dl>
-                  <p>{{ product.description }}</p>
+                  <div class="product-description" v-html="product.description" />
                 </div>
               </Transition>
             </div>
@@ -97,22 +87,6 @@
       </div>
     </section>
 
-    <section class="px-5 py-10 sm:px-8 lg:px-12">
-      <div class="mx-auto max-w-[1920px]">
-        <h2 class="mb-6 text-2xl font-bold sm:text-3xl">You may also like</h2>
-        <div class="grid gap-4 sm:grid-cols-3">
-          <NuxtLink v-for="item in mayLike" :key="item.name" :to="item.slug" class="group flex items-center gap-4 border border-[#dddddd] p-4 transition hover:-translate-y-1 hover:border-brand-red/40 hover:shadow-lg">
-            <span class="product-bottle relative block h-24 w-9 shrink-0 rounded-b rounded-t-full transition group-hover:-translate-y-1" :style="`--bottle:${item.color}`" />
-            <span>
-              <span class="block text-sm font-medium text-[#777]">{{ item.brand }}</span>
-              <span class="mt-1 block font-medium">{{ item.name }}</span>
-              <span class="mt-2 block font-semibold">{{ item.price }}</span>
-            </span>
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
-
     <ProductSlider title="Recommended products" :products="recommendedProducts" />
   </main>
 </template>
@@ -121,12 +95,18 @@
 const route = useRoute()
 const quantity = ref(1)
 const descriptionOpen = ref(true)
+const productSlug = computed(() => String(route.params.slug || ''))
+const { data: productDetail } = await useAsyncData('tokowine-product-detail', () => fetchTokowineProductDetail(productSlug.value), {
+  watch: [productSlug]
+})
 
-const product = {
+const fallbackProduct = {
   name: 'McDonald Vodka Mix 1000ml',
   sku: 'SPV-VK-0021',
   category: 'Spirits',
   price: 'Rp 110.000,00',
+  currentPrice: 'Rp 110.000,00',
+  originalPrice: '',
   images: [
     { label: 'Main bottle', color: '#f0bd2f' },
     { label: 'Bottle with pack', color: '#283ca0' }
@@ -144,17 +124,41 @@ const product = {
     'McDonald Vodka Mix is formulated to complement premium vodka, enhancing its smoothness and clarity without overpowering its natural character. Ideal for home bars and professional mixing, this blend keeps cocktails balanced, clean, and easy to serve.'
 }
 
+const product = computed(() => {
+  if (!productDetail.value) return fallbackProduct
+  const detail = productDetail.value
+  const sortedImages = [...(detail.images || [])].sort((a, b) => Number(b.mainimage) - Number(a.mainimage))
+
+  return {
+    name: detail.productname,
+    sku: detail.sku,
+    category: detail.category,
+    price: formatRupiahValue(detail.price),
+    currentPrice: formatRupiahValue(hasPromoPrice(detail.promoprice) ? detail.promoprice : detail.price),
+    originalPrice: hasPromoPrice(detail.promoprice) ? formatRupiahValue(detail.price) : '',
+    images: sortedImages.length
+      ? sortedImages.map((image, index) => ({
+        label: `${detail.productname} image ${index + 1}`,
+        color: '#6620d5',
+        imageUrl: image.imageurl
+      }))
+      : fallbackProduct.images,
+    meta: [
+      { label: 'Brand', value: detail.brandname },
+      { label: 'Category', value: detail.category },
+      { label: 'Sub Category', value: detail.subcategory },
+      { label: 'Weight', value: `${detail.weight} g` },
+      { label: 'Stock', value: detail.stock }
+    ],
+    description: detail.productdesc
+  }
+})
+
 const benefits = [
   { title: 'Same Day Delivery', copy: 'Fast delivery with professional driver partners.' },
   { title: '100% Original', copy: 'All products are curated and checked before listing.' },
   { title: 'Lowest Price Guarantee', copy: 'Regular promos and attractive prices for selected products.' },
   { title: 'Largest Selection', copy: 'More than 1000 choices of alcoholic and non-alcoholic drinks.' }
-]
-
-const mayLike = [
-  { brand: 'Cloud Seven', name: 'Friendship Black Tea Vodka 650ml', price: 'Rp 85.000,00', color: '#7b4b21', slug: '/products/friendship-black-tea-vodka-650ml' },
-  { brand: 'Maze Maze', name: 'Maze Maze Vodka Original 700ml', price: 'Rp 350.000,00', color: '#f3f3f3', slug: '/products/maze-maze-vodka-original-700ml' },
-  { brand: 'Orang Tua', name: 'Intisari Blackcurrant 620ml', price: 'Rp 76.000,00', color: '#3c1937', slug: '/products/intisari-blackcurrant-620ml' }
 ]
 
 const recommendedProducts = [
@@ -167,25 +171,12 @@ const recommendedProducts = [
 ]
 
 useSeoMeta({
-  title: `${product.name} - tokowinepop`,
-  description: product.description
+  title: () => `${product.value.name} - tokowinepop`,
+  description: () => product.value.description.replace(/<[^>]+>/g, '')
 })
 
 watchEffect(() => {
   if (route.params.slug) quantity.value = 1
 })
 
-const shareProduct = async () => {
-  if (typeof navigator !== 'undefined' && navigator.share) {
-    try {
-      await navigator.share({
-        title: product.name,
-        text: product.description,
-        url: window.location.href
-      })
-    } catch {
-      // User cancelled the native share sheet.
-    }
-  }
-}
 </script>

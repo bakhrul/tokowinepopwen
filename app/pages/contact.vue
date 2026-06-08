@@ -15,13 +15,13 @@
           <div class="grid gap-5 sm:grid-cols-2">
             <div class="rounded-lg bg-[#fafafa] p-5">
               <p class="text-xs font-semibold uppercase tracking-wide text-[#777]">Store</p>
-              <h2 class="mt-2 text-2xl font-bold">tokowinepop</h2>
+              <h2 class="mt-2 text-2xl font-bold">{{ footerData?.businessname || 'tokowinepop' }}</h2>
             </div>
-            <a href="https://wa.me/628118869172" target="_blank" rel="noreferrer" class="rounded-lg bg-[#eaffef] p-5 transition hover:-translate-y-1 hover:shadow-lg">
+            <a :href="chatUrl" target="_blank" rel="noreferrer" class="rounded-lg bg-[#eaffef] p-5 transition hover:-translate-y-1 hover:shadow-lg">
               <p class="text-xs font-semibold uppercase tracking-wide text-[#327a42]">WhatsApp</p>
               <div class="mt-2 flex items-center gap-3 text-2xl font-semibold text-[#1f5c48]">
                 <IconWhatsapp class="size-8" />
-                xxxxxxx
+                {{ contactPhone }}
               </div>
               <p class="mt-2 text-sm text-[#4f7c5b]">Click to open WhatsApp</p>
             </a>
@@ -30,11 +30,11 @@
           <div class="mt-6 grid gap-5">
             <div class="rounded-lg border border-[#eeeeee] p-5">
               <p class="text-xs font-semibold uppercase tracking-wide text-[#777]">Address</p>
-              <p class="mt-2 text-lg font-medium leading-7">Address line placeholder, Tangerang, Banten 15810</p>
+              <p class="mt-2 whitespace-pre-line text-lg font-medium leading-7">{{ contactAddress }}</p>
             </div>
-            <a href="mailto:support@tokowinepop.test" class="rounded-lg border border-[#eeeeee] p-5 transition hover:border-brand-red/40 hover:shadow-lg">
+            <a :href="`mailto:${contactEmail}`" class="rounded-lg border border-[#eeeeee] p-5 transition hover:border-brand-red/40 hover:shadow-lg">
               <p class="text-xs font-semibold uppercase tracking-wide text-[#777]">Email</p>
-              <p class="mt-2 text-lg font-medium">support@tokowinepop.test</p>
+              <p class="mt-2 text-lg font-medium">{{ contactEmail }}</p>
             </a>
           </div>
         </div>
@@ -53,6 +53,12 @@
 </template>
 
 <script setup lang="ts">
+const { data: footerData } = await useAsyncData('tokowine-footer', fetchTokowineFooter)
+const contactPhone = computed(() => footerData.value?.hpno || '0812-3456-7890')
+const contactEmail = computed(() => footerData.value?.email || 'hello@tokowinepop.com')
+const contactAddress = computed(() => footerData.value?.address || 'Address line placeholder, Tangerang, Banten 15810')
+const chatUrl = computed(() => whatsappUrl(footerData.value?.hpno || contactPhone.value))
+
 const cards = [
   { title: 'Fast Response', copy: 'Use WhatsApp for urgent questions about order status and availability.' },
   { title: 'Store Information', copy: 'Ask about address, delivery coverage, and pickup availability.' },

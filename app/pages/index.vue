@@ -1,16 +1,16 @@
 <template>
   <main>
-    <HeroSection />
+    <HeroSection :slides="heroSlides" />
     <CategoryGrid :categories="categories" />
     <OfferTiles :offers="offers" />
     <ProductCollection
       id="collections"
       title="Best Seller"
       :products="featuredProducts"
-      cta-title="New Arrivals"
+      cta-title="Show All Product"
       cta-text="Shop all"
     />
-    <StorySection />
+    <StorySection :content="deliveryContent" :image="deliveryImageUrl" :maps-url="deliveryMapsUrl" />
     <BrandStrip :brands="brands" />
   </main>
 </template>
@@ -21,7 +21,10 @@ import bundlesOffer from '~/assets/images/offers/bundles.jpg'
 import spiritsOffer from '~/assets/images/offers/spirits.jpg'
 import wineOffer from '~/assets/images/offers/wine.jpg'
 
-const categories = [
+const { data: homeData } = await useAsyncData('tokowine-home', fetchTokowineHome)
+const { data: apiCategories } = await useAsyncData('tokowine-categories', fetchTokowineCategories)
+
+const fallbackCategories = [
   {
     name: 'Spirits',
     children: ['Whisky', 'Vodka', 'Gin', 'Rum', 'Tequila', 'Brandy'],
@@ -82,7 +85,7 @@ const categories = [
   }
 ]
 
-const offers = [
+const fallbackOffers = [
   {
     title: 'Spirits',
     image: spiritsOffer
@@ -101,7 +104,7 @@ const offers = [
   }
 ]
 
-const featuredProducts = [
+const fallbackProducts = [
   { brand: 'McDonald', name: 'McDonald Vodka Mix 1000ml', price: 'Rp 110.000,00', color: '#f0bd2f', size: 'h-80 w-24', slug: 'mcdonald-vodka-mix-1000ml' },
   { brand: 'Johnnie Walker', name: 'Johnnie Walker Red Label Blended Whisky 750ml', price: 'Rp 350.000,00', color: '#d88426', size: 'h-80 w-24' },
   { brand: 'Jim Beam', name: 'Jim Beam White Bourbon Whiskey 750ml', price: 'Rp 370.000,00', color: '#c1782e', size: 'h-72 w-24' },
@@ -114,5 +117,59 @@ const featuredProducts = [
   { brand: 'Buffalo Trace', name: 'Buffalo Trace Bourbon Whiskey 750ml', price: 'Rp 715.000,00', color: '#9c351d', size: 'h-72 w-24' }
 ]
 
-const brands = ['Macallan', 'Hibiki', 'Don Julio', 'Jose Cuervo', 'Singleton', 'Cardhu']
+const fallbackBrands = ['Macallan', 'Hibiki', 'Don Julio', 'Jose Cuervo', 'Singleton', 'Cardhu']
+
+const categories = computed(() => {
+  if (!apiCategories.value?.length) return fallbackCategories
+  return apiCategories.value.map((category) => ({
+    name: category.category,
+    logoUrl: category.logourl,
+    children: category.subcategory.map((item) => item.subcategory),
+    bottles: [
+      { color: '#26231f', size: 'h-80 w-24' },
+      { color: '#6620d5', size: 'h-56 w-12' }
+    ]
+  }))
+})
+
+const heroSlides = computed(() => homeData.value?.slider?.map((slide) => ({
+  title: slide.promoname,
+  image: slide.bannerimgurl
+})) || [])
+
+const offers = computed(() => {
+  if (!homeData.value?.promo?.length) return fallbackOffers
+  return homeData.value.promo.map((promo) => ({
+    title: promo.promoname,
+    image: promo.bannerurl,
+    to: promo.isdetail === '1' ? `/promo/${promo.id}` : '#'
+  }))
+})
+
+const featuredProducts = computed(() => {
+  if (!homeData.value?.bestseller?.length) return fallbackProducts
+  return homeData.value.bestseller.map((product) => ({
+    brand: product.brandname,
+    name: product.productname,
+    price: formatRupiahValue(product.price),
+    currentPrice: formatRupiahValue(hasPromoPrice(product.promoprice) ? product.promoprice : product.price),
+    originalPrice: hasPromoPrice(product.promoprice) ? formatRupiahValue(product.price) : '',
+    color: '#6620d5',
+    size: 'h-80 w-24',
+    slug: product.slug,
+    imageUrl: product.productimageurl
+  }))
+})
+
+const brands = computed(() => {
+  if (!homeData.value?.bestcoll?.length) return fallbackBrands.map((brand) => ({ name: brand }))
+  return homeData.value.bestcoll.map((brand) => ({
+    name: brand.brand,
+    logoUrl: brand.logourl
+  }))
+})
+
+const deliveryContent = computed(() => homeData.value?.delivery || '')
+const deliveryImageUrl = computed(() => homeData.value?.deliverybannerurl || '')
+const deliveryMapsUrl = computed(() => mapsUrl(homeData.value?.lat, homeData.value?.lon))
 </script>

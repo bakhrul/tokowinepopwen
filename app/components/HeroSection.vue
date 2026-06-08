@@ -6,13 +6,15 @@
       class="absolute inset-0 transition-all duration-700 ease-out"
       :class="index === activeSlide ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'"
     >
-      <div :class="['absolute inset-0', slide.bgClass]" />
-      <div class="absolute left-6 top-1/2 hidden -translate-y-1/2 rotate-[-16deg] items-end gap-4 lg:flex">
+      <img v-if="slide.image" :src="slide.image" :alt="slide.title" class="absolute inset-0 h-full w-full object-cover" />
+      <div v-if="slide.image" class="absolute inset-0 bg-black/10" />
+      <div v-else :class="['absolute inset-0', slide.bgClass || 'bg-black']" />
+      <div v-if="!slide.image" class="absolute left-6 top-1/2 hidden -translate-y-1/2 rotate-[-16deg] items-end gap-4 lg:flex">
         <div class="product-bottle relative h-64 w-20 rounded-b-lg rounded-t-full shadow-2xl" :style="`--bottle:${slide.bottle}`" />
         <div class="h-20 w-20 rounded-full border-[12px] border-amber-100/65" />
       </div>
 
-      <div class="relative mx-auto flex h-full max-w-[1920px] items-center justify-end px-6 sm:px-12">
+      <div v-if="!slide.image" class="relative mx-auto flex h-full max-w-[1920px] items-center justify-end px-6 sm:px-12">
         <div class="reveal w-full max-w-[520px] text-center text-[#e8d097]">
           <div class="mx-auto mb-6 grid size-32 place-items-center rounded-full border-4 border-[#d8bd75]/70 text-4xl font-black sm:size-48 sm:text-6xl">
             {{ slide.mark }}
@@ -37,10 +39,23 @@
 </template>
 
 <script setup lang="ts">
+type HeroSlide = {
+  title: string
+  image?: string
+  mark?: string
+  copy?: string
+  bottle?: string
+  bgClass?: string
+}
+
+const props = defineProps<{
+  slides?: HeroSlide[]
+}>()
+
 const activeSlide = ref(0)
 let timer: ReturnType<typeof setInterval> | undefined
 
-const slides = [
+const fallbackSlides: HeroSlide[] = [
   {
     mark: 'CJ',
     title: 'Since 1948',
@@ -64,8 +79,10 @@ const slides = [
   }
 ]
 
+const slides = computed<HeroSlide[]>(() => props.slides?.length ? props.slides : fallbackSlides)
+
 const nextSlide = () => {
-  activeSlide.value = (activeSlide.value + 1) % slides.length
+  activeSlide.value = (activeSlide.value + 1) % slides.value.length
 }
 
 const startAutoplay = () => {

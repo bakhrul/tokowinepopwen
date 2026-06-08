@@ -27,6 +27,7 @@
 <script setup lang="ts">
 const ageGateKey = 'tokowinepop_age_verified'
 const ageVerified = useCookie<string | null>(ageGateKey, {
+  path: '/',
   sameSite: 'lax'
 })
 const visible = ref(ageVerified.value !== 'true')

@@ -26,14 +26,12 @@
 
 <script setup lang="ts">
 const ageGateKey = 'tokowinepop_age_verified'
-const ageVerified = useCookie<string | null>(ageGateKey, {
-  path: '/',
-  sameSite: 'lax'
-})
-const visible = ref(ageVerified.value !== 'true')
+const visible = ref(false)
+let channel: BroadcastChannel | null = null
 
 const acceptAgeGate = () => {
-  ageVerified.value = 'true'
+  sessionStorage.setItem(ageGateKey, 'true')
+  channel?.postMessage('verified')
   visible.value = false
 }
 
@@ -48,11 +46,34 @@ const syncBodyScroll = () => {
 watch(visible, syncBodyScroll)
 
 onMounted(() => {
-  visible.value = ageVerified.value !== 'true'
+  // Cek apakah tab lain sudah verify di session ini
+  visible.value = sessionStorage.getItem(ageGateKey) !== 'true'
   syncBodyScroll()
+
+  // Sync antar tab dalam satu browser session
+  channel = new BroadcastChannel(ageGateKey)
+  channel.onmessage = (e) => {
+    if (e.data === 'verified') {
+      sessionStorage.setItem(ageGateKey, 'true')
+      visible.value = false
+    }
+  }
+
+  // Minta tab lain broadcast state mereka (kalau tab baru dibuka)
+  channel.postMessage('check')
+  channel.onmessage = (e) => {
+    if (e.data === 'verified' || e.data === 'already_verified') {
+      sessionStorage.setItem(ageGateKey, 'true')
+      visible.value = false
+    }
+    if (e.data === 'check' && sessionStorage.getItem(ageGateKey) === 'true') {
+      channel?.postMessage('already_verified')
+    }
+  }
 })
 
 onBeforeUnmount(() => {
   document.body.style.overflow = ''
+  channel?.close()
 })
 </script>
